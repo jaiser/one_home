@@ -9,11 +9,25 @@
                     http://www.springframework.org/schema/context/spring-context-3.1.xsd
                     http://www.springframework.org/schema/mvc
                     http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
-    <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
-    <context:component-scan base-package="com.oneHome.controller" />
-
     <!-- 开启SpringMVC注解模式 -->
+    <!-- 启动注解驱动的spring MVC功能,注册请求url和注解POJO类方法的映射 -->
+    <!-- 自动扫描该包，使SpringMVC认为包下用了@controller注解的类是控制器 -->
+    <!--<context:component-scan base-package="com.oneHome.controller" />-->
+
+    <!--<mvc:annotation-driven/>-->
+
+    <!--加载静态资源-->
+    <mvc:default-servlet-handler/>
+
+    <!--1.组件扫描，可以扫描 controller、Service、...
+    并注册添加到 spring 容器中
+    这里扫描 controller，指定controller的包
+    -->
+    <context:component-scan base-package="com.oneHome"/>
+
+    <!--开启注解注解驱动-->
     <mvc:annotation-driven/>
+
     <!--避免IE执行AJAX时，返回JSON出现下载文件 -->
     <bean id="mappingJacksonHttpMessageConverter"
           class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
@@ -38,6 +52,7 @@
         <property name="prefix" value="/WEB-INF/html/" />
         <property name="suffix" value=".html" />
     </bean>
+    <!-- 启动注解驱动的spring MVC功能,注册请求url和注解POJO类方法的映射 -->
     <!--这里是对静态资源的映射 -->
     <mvc:resources mapping="/static/**" location="/WEB-INF/static/" />
     <!--<mvc:resources mapping="/js/**" location="WEB-INF/static/js/" />-->
